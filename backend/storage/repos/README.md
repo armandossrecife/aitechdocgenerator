@@ -1,0 +1,1 @@
+Armazena os repositorios analisados.
