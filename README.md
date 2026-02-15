@@ -106,14 +106,14 @@ cd frontend
 python app.py
 ```
 
-✅ O frontend estará rodando em: **http://127.0.0.1:5000**
+✅ O frontend estará rodando em: **http://127.0.0.1:5001**
 
 ## 📖 Usando o Sistema
 
 ### Passo a Passo
 
 1. **Acesse a aplicação**
-   - Abra seu navegador e vá para: http://127.0.0.1:5000
+   - Abra seu navegador e vá para: http://127.0.0.1:5001
 
 2. **Crie sua conta**
    - Clique em "Register" no menu
