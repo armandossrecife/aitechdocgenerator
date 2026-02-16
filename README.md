@@ -21,7 +21,7 @@ O **AutoDocGen** é uma plataforma web que automatiza a criação de documentaç
 
 - 🔐 **Autenticação segura** com JWT
 - 📦 **Análise de repositórios públicos** do GitHub
-- 🤖 **Geração automática de documentação** com IA
+- 🤖 **Geração automática de documentação** com IA (Modelos LLM)
 - 📊 **Dashboard interativo** com histórico de análises
 - 📄 **Exportação em Markdown e PDF**
 - 🎨 **Diagramas arquiteturais** em Mermaid (C4, MVC, Módulos)
@@ -35,6 +35,24 @@ Antes de começar, certifique-se de ter instalado:
 - **Python 3.8+**
 - **Ollama** (rodando com o modelo Qwen3)
 - **Git** (para clonar o repositório)
+- **uv** (para gerenciar bibliotecas Python) sdfs
+
+### Troubleshooting do xhtml2pdf (Linux)
+
+O xhtml2pdf depende indiretamente do pycairo (via rlpycairo → svglib), que requer bibliotecas de desenvolvimento do Cairo:
+
+```bass
+sudo apt update
+sudo apt install -y \
+    libcairo2-dev \
+    pkg-config \
+    libpango1.0-dev \
+    libglib2.0-dev \
+    libffi-dev \
+    libxml2-dev \
+    libxslt1-dev \
+    python3-dev
+```
 
 ### Instalando o Ollama
 
@@ -77,13 +95,15 @@ autodocgen/
 **Backend (FastAPI):**
 ```bash
 cd backend
-pip install -r requirements.txt
+source ./venv/bin/activate
+uv pip install -r requirements.txt
 ```
 
 **Frontend (Flask):**
 ```bash
 cd ../frontend
-pip install -r requirements.txt
+source ./venv/bin/activate
+uv pip install -r requirements.txt
 ```
 
 ## 🏃 Executando a Aplicação
@@ -94,7 +114,7 @@ Você precisará de **dois terminais** abertos simultaneamente.
 
 ```bash
 cd backend
-uvicorn app.main:app --reload --port 8000
+uv run uvicorn app.main:app --port 8000
 ```
 
 ✅ O backend estará rodando em: **http://127.0.0.1:8000**
@@ -103,7 +123,7 @@ uvicorn app.main:app --reload --port 8000
 
 ```bash
 cd frontend
-python app.py
+uv run app.py
 ```
 
 ✅ O frontend estará rodando em: **http://127.0.0.1:5001**
@@ -129,7 +149,7 @@ python app.py
 
 5. **Inicie a análise**
    - Clique em "Analyze 🚀"
-   - Aguarde o processamento (pode levar alguns minutos)
+   - Aguarde o processamento (pode levar alguns minutos, com isso, você pode sair dessa página, pois o processo funciona em background)
 
 6. **Visualize e baixe a documentação**
    - Acesse o histórico de análises
@@ -140,8 +160,7 @@ python app.py
 
 ### Estrutura da Documentação
 
-```markdown
-# Documentação Técnica - [Nome do Projeto]
+**Documentação Técnica - [Nome do Projeto]**
 
 ## 1. Documento de Requisitos
 
@@ -193,7 +212,6 @@ project/
 
 ## 4. Resumo Executivo
 [Resumo automático do projeto]
-```
 
 ## 🛠️ Tecnologias Utilizadas
 
@@ -295,6 +313,8 @@ ANALYSIS_TIMEOUT_SECONDS=300
 
 Para executar com Docker:
 
+Crie os arquivos Dockerfile para a aplicação backend e frontend.
+
 ```bash
 docker-compose up --build
 ```
@@ -337,7 +357,7 @@ Contribuições são bem-vindas! Por favor, siga estes passos:
 4. Push para a branch (`git push origin feature/nova-feature`)
 5. Abra um Pull Request
 
-## 📝 Roadmap
+## 📝 Melhorias Futuras
 
 - [ ] Suporte a repositórios privados (OAuth GitHub)
 - [ ] Análise incremental (detectar mudanças)
